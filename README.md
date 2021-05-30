@@ -1,6 +1,6 @@
-# Alpine Flask server
+# Alpine Linux Python Flask Server
 
-This is an example of building a [python flask web server](https://flask.palletsprojects.com/en/2.0.x/) running on Alpine Linux in a docker container.
+This is an example of building a [python flask web server](https://flask.palletsprojects.com/en/2.0.x/) running on [Alpine Linux](https://alpinelinux.org) in a docker container.
 
 # Virtual environment
 
