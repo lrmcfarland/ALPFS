@@ -51,4 +51,4 @@ ADD static static
 # run app
 
 ENTRYPOINT ["python"]
-CMD [ "alpine_flask.py", "-p", "8080" ]
+CMD [ "alpine_flask.py" ]

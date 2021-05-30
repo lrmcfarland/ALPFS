@@ -49,18 +49,25 @@ You should consider upgrading via the '/Users/lrm/Documents/Computer/examples/te
 
 ## From the command line
 
+In the activated test environment
+
 ```
 
-$ python3 alpine_flask.py 
- * Serving Flask app 'squeaker' (lazy loading)
+(test-venv) $ $ python3 alpine_flask.py
+ * Serving Flask app 'alpine_flask' (lazy loading)
  * Environment: production
    WARNING: This is a development server. Do not use it in a production deployment.
    Use a production WSGI server instead.
  * Debug mode: off
-[2021-05-30 13:53:14,960 WARNING _internal.py 225]  * Running on all addresses.
+[2021-05-30 16:05:12,403 WARNING _internal.py 225]  * Running on all addresses.
    WARNING: This is a development server. Do not use it in a production deployment.
-[2021-05-30 13:53:14,960 INFO _internal.py 225]  * Running on http://192.168.4.26:80/ (Press CTRL+C to quit)
-
+[2021-05-30 16:05:12,403 INFO _internal.py 225]  * Running on http://192.168.4.26:80/ (Press CTRL+C to quit)
+[2021-05-30 16:05:22,920 INFO _internal.py 225] 127.0.0.1 - - [30/May/2021 16:05:22] "GET / HTTP/1.1" 200 -
+[2021-05-30 16:05:22,934 INFO _internal.py 225] 127.0.0.1 - - [30/May/2021 16:05:22] "GET /static/style.css HTTP/1.1" 304 -
+[2021-05-30 16:05:30,957 INFO _internal.py 225] 127.0.0.1 - - [30/May/2021 16:05:30] "GET / HTTP/1.1" 200 -
+[2021-05-30 16:05:30,962 INFO _internal.py 225] 127.0.0.1 - - [30/May/2021 16:05:30] "GET /static/style.css HTTP/1.1" 304 -
+[2021-05-30 16:05:30,969 INFO _internal.py 225] 127.0.0.1 - - [30/May/2021 16:05:30] "GET /static/style.css HTTP/1.1" 304 -
+^C
 
 ```
 
@@ -75,21 +82,26 @@ The web page should now be available on http://localhost
   docker build -f Dockerfile -t alpineflask .
 ```
 ## To run
+
+With port 80 inside the container mapped to port 8080 on the outside
+
 ```
-  docker run --name the_alpineflask -d -p 8080:8080 alpineflask
+  docker run --name the_alpineflask -d -p 8080:80 alpineflask
 ```
 
-## To test
-
-http://localhost:8080
-
-TODO error if on port 80
+TODO Conflict with port 80
 
 ```
 $ docker logs the_alpineflask
 SyntaxError: Non-UTF-8 code starting with '\x84' in file /bin/sh on line 2, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
 
 ```
+
+## To test
+
+http://localhost:8080
+
+
 
 ## to shell
 ```
