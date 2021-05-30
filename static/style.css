@@ -1,0 +1,10 @@
+/* default style sheet */
+
+body            { font-family: sans-serif;
+		  background: #ffffff;
+		  margin: 2px;
+                  padding: 2px;
+		}
+
+a, h1, h2, h3   { color: #BBCCFF; }
+h1, h2, h3      { font-family: 'Helvetica', sans-serif; margin: 0; }
