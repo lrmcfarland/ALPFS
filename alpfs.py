@@ -102,7 +102,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--host', type=str, dest='host', default=defaults['host'],
                         metavar='host',
-                        help='fqdn or IP of host (default: %(default)s)')
+                        help='FQDN or IP of host (default: %(default)s)')
 
     parser.add_argument('-l', '--loglevel', choices=list(loglevels.keys()),
                         dest='loglevel', default=defaults['loglevel'],
@@ -133,4 +133,4 @@ if __name__ == '__main__':
 
     app = factory(args.config)
 
-    app.run(host=args.host, port=int(os.getenv('SQUEAKER_PORT', args.port)), debug=args.debug, threaded=True)
+    app.run(host=args.host, port=int(os.getenv('ALPFS_PORT', args.port)), debug=args.debug, threaded=True)

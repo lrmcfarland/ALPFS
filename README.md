@@ -18,19 +18,20 @@ Use the python3 venv module to setup a virtual test environment.
 #### Create the venv directory
 This is a one time setup
 ```
-$ python3 -m venv test-venv
+    python3 -m venv venv-alpfs
 ```
 #### Activate
 This is needed each time a new shell is started for testing
 ```
-$ source test-venv/bin/activate
+    source venv-alpfs/bin/activate
 ```
 
 #### Install
 One time setup again
 
 ```
-$ pip install -r requirements.txt
+    pip install -r requirements.txt
+
 Collecting flask
   Downloading Flask-2.0.1-py3-none-any.whl (94 kB)
      |████████████████████████████████| 94 kB 1.6 MB/s
@@ -49,15 +50,16 @@ Collecting MarkupSafe>=2.0
   Downloading MarkupSafe-2.0.1-cp39-cp39-macosx_10_9_x86_64.whl (13 kB)
 Installing collected packages: MarkupSafe, Werkzeug, Jinja2, itsdangerous, click, flask
 Successfully installed Jinja2-3.0.1 MarkupSafe-2.0.1 Werkzeug-2.0.1 click-8.0.1 flask-2.0.1 itsdangerous-2.0.1
-WARNING: You are using pip version 21.1.1; however, version 21.1.2 is available.
-You should consider upgrading via the '/Users/lrm/Documents/Computer/examples/terraform/alpine-flask/squeaker-venv/bin/python3.9 -m pip install --upgrade pip' command.
+
 
 ```
 
 ### In the activated test environment
 
 ```
-(test-venv) [lrm@lrmz-iMac-2017 ALPFS (main)]$ python3 alpfs.py
+    python3 alpfs.py
+
+
  * Serving Flask app 'alpfs' (lazy loading)
  * Environment: production
    WARNING: This is a development server. Do not use it in a production deployment.
@@ -82,7 +84,7 @@ The web page should now be available on http://localhost
 test_alpfs.py has an example of a flask unit test.
 
 ```
-(test-venv) [lrm@lrmz-iMac-2017 ALPFS (main)]$ python3 test_alpfs.py
+(venv-alpfs) [lrm@lrmz-iMac-2017 ALPFS (main)]$ python3 test_alpfs.py
 .
 ----------------------------------------------------------------------
 Ran 1 test in 0.016s
@@ -99,13 +101,13 @@ OK
 ### To build
 
 ```
-  docker build -f Dockerfile -t alpfs .
+    docker build -f Dockerfile -t alpfs .
 ```
 ### To run
 
 
 ```
-  docker run --name alpfs00 -d -p 80:80 alpfs
+    docker run --name alpfs00 -d -p 80:80 alpfs
 ```
 
 The web page should now be available on http://localhost
@@ -114,7 +116,7 @@ The web page should now be available on http://localhost
 With port 8080 on the outside mapped to port 80 on the inside
 
 ```
-  docker run --name alpfs00 -d -p 8080:80 alpfs
+    docker run --name alpfs00 -d -p 8080:80 alpfs
 ```
 
 The web page should now be available on http://localhost:8080
@@ -122,7 +124,7 @@ The web page should now be available on http://localhost:8080
 ### Logs
 
 ```
-(test-venv) [lrm@lrmz-iMac-2017 ALPFS (rename2alpfs)]$ docker logs alpfs00
+(venv-alpfs) [lrm@lrmz-iMac-2017 ALPFS (rename2alpfs)]$ docker logs alpfs00
  * Serving Flask app 'alpfs' (lazy loading)
  * Environment: production
    WARNING: This is a development server. Do not use it in a production deployment.
@@ -144,21 +146,21 @@ http://localhost:8080
 
 ### To shell
 ```
-  docker exec -it alpfs00 sh
+    docker exec -it alpfs00 sh
 ```
 
 
 ### To stop
 
 ```
-(test-venv) [lrm@lrmz-iMac-2017 ALPFS (rename2alpfs)]$ docker stop alpfs00
+(venv-alpfs) [lrm@lrmz-iMac-2017 ALPFS (rename2alpfs)]$ docker stop alpfs00
 alpfs00
 
-(test-venv) [lrm@lrmz-iMac-2017 ALPFS (rename2alpfs)]$ docker ps -a
+(venv-alpfs) [lrm@lrmz-iMac-2017 ALPFS (rename2alpfs)]$ docker ps -a
 CONTAINER ID   IMAGE     COMMAND             CREATED              STATUS                       PORTS     NAMES
 4599c0076e3a   alpfs     "python alpfs.py"   About a minute ago   Exited (137) 6 seconds ago             alpfs00
 
-(test-venv) [lrm@lrmz-iMac-2017 ALPFS (rename2alpfs)]$ docker rm alpfs00
+(venv-alpfs) [lrm@lrmz-iMac-2017 ALPFS (rename2alpfs)]$ docker rm alpfs00
 alpfs00
 
 
