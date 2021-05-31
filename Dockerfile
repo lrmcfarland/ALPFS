@@ -1,23 +1,23 @@
-# This creates the simple flask server on alpine linux
+# This creates an alpine linux python flask server
 
 # to build:
-# docker build -f Dockerfile -t alpineflask .
+# docker build -f Dockerfile -t alpfs .
 
 # to run:
-# docker run --name the_alpineflask -d -p 8080:8080 alpineflask
+# docker run --name alpfs00 -d -p 8080:80 alpfs
 
 # to test:
 # http://localhost
 
 # to shell:
-# docker exec -it the_alpineflask sh
+# docker exec -it alpfs00 sh
 
 
 FROM python:3-alpine
 
 
 LABEL maintainer "lrm@starbug.com"
-LABEL service "alpineflask"
+LABEL service "alpfs"
 
 
 # add app user
@@ -39,16 +39,18 @@ ENV PATH ${PATH}:${USER_HOME}/.local/bin
 
 RUN pip install --upgrade pip
 
-WORKDIR ${HOME}/alpineflask
+WORKDIR ${HOME}/alpfs
 
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-ADD alpine_flask.py .
+ADD alpfs.py .
 ADD templates templates
 ADD static static
 
 # run app
 
+EXPOSE 80
+
 ENTRYPOINT ["python"]
-CMD [ "alpine_flask.py" ]
+CMD [ "alpfs.py" ]

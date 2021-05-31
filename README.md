@@ -1,6 +1,11 @@
 # Alpine Linux Python Flask Server
 
-This is an example of building a [python flask web server](https://flask.palletsprojects.com/en/2.0.x/) running on [Alpine Linux](https://alpinelinux.org) in a docker container.
+This is an example of building a [python flask web
+server](https://flask.palletsprojects.com/en/2.0.x/) running on
+[Alpine Linux](https://alpinelinux.org) in a docker container.
+
+The docker image is just under 50 MB in size.
+
 
 # Virtual environment
 
@@ -52,21 +57,19 @@ You should consider upgrading via the '/Users/lrm/Documents/Computer/examples/te
 In the activated test environment
 
 ```
-
-(test-venv) $ $ python3 alpine_flask.py
- * Serving Flask app 'alpine_flask' (lazy loading)
+(test-venv) [lrm@lrmz-iMac-2017 ALPFS (main)]$ python3 alpfs.py
+ * Serving Flask app 'alpfs' (lazy loading)
  * Environment: production
    WARNING: This is a development server. Do not use it in a production deployment.
    Use a production WSGI server instead.
  * Debug mode: off
-[2021-05-30 16:05:12,403 WARNING _internal.py 225]  * Running on all addresses.
+[2021-05-31 07:40:37,558 WARNING _internal.py 225]  * Running on all addresses.
    WARNING: This is a development server. Do not use it in a production deployment.
-[2021-05-30 16:05:12,403 INFO _internal.py 225]  * Running on http://192.168.4.26:80/ (Press CTRL+C to quit)
-[2021-05-30 16:05:22,920 INFO _internal.py 225] 127.0.0.1 - - [30/May/2021 16:05:22] "GET / HTTP/1.1" 200 -
-[2021-05-30 16:05:22,934 INFO _internal.py 225] 127.0.0.1 - - [30/May/2021 16:05:22] "GET /static/style.css HTTP/1.1" 304 -
-[2021-05-30 16:05:30,957 INFO _internal.py 225] 127.0.0.1 - - [30/May/2021 16:05:30] "GET / HTTP/1.1" 200 -
-[2021-05-30 16:05:30,962 INFO _internal.py 225] 127.0.0.1 - - [30/May/2021 16:05:30] "GET /static/style.css HTTP/1.1" 304 -
-[2021-05-30 16:05:30,969 INFO _internal.py 225] 127.0.0.1 - - [30/May/2021 16:05:30] "GET /static/style.css HTTP/1.1" 304 -
+[2021-05-31 07:40:37,558 INFO _internal.py 225]  * Running on http://192.168.4.26:80/ (Press CTRL+C to quit)
+[2021-05-31 07:41:37,582 INFO _internal.py 225] 127.0.0.1 - - [31/May/2021 07:41:37] "GET / HTTP/1.1" 200 -
+[2021-05-31 07:41:37,591 INFO _internal.py 225] 127.0.0.1 - - [31/May/2021 07:41:37] "GET /static/style.css HTTP/1.1" 200 -
+
+
 ^C
 
 ```
@@ -74,25 +77,42 @@ In the activated test environment
 The web page should now be available on http://localhost
 
 
-# In a container
+## In a container
 
-## To build
+### To build
 
 ```
-  docker build -f Dockerfile -t alpineflask .
+  docker build -f Dockerfile -t alpfs .
 ```
-## To run
+### To run
 
 With port 80 inside the container mapped to port 8080 on the outside
 
 ```
-  docker run --name the_alpineflask -d -p 8080:80 alpineflask
+  docker run --name alpfs00 -d -p 8080:80 alpfs
 ```
+
+### Logs
+
+```
+(test-venv) [lrm@lrmz-iMac-2017 ALPFS (rename2alpfs)]$ docker logs alpfs00
+ * Serving Flask app 'alpfs' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+[2021-05-31 14:49:25,951 WARNING _internal.py 225]  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+[2021-05-31 14:49:25,952 INFO _internal.py 225]  * Running on http://172.17.0.2:80/ (Press CTRL+C to quit)
+[2021-05-31 14:49:37,880 INFO _internal.py 225] 172.17.0.1 - - [31/May/2021 14:49:37] "GET / HTTP/1.1" 200 -
+[2021-05-31 14:49:37,885 INFO _internal.py 225] 172.17.0.1 - - [31/May/2021 14:49:37] "GET /static/style.css HTTP/1.1" 200 -
+```
+
 
 TODO Conflict with port 80
 
 ```
-$ docker logs the_alpineflask
+$ docker logs alpfs00
 SyntaxError: Non-UTF-8 code starting with '\x84' in file /bin/sh on line 2, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
 
 ```
@@ -103,11 +123,27 @@ http://localhost:8080
 
 
 
-## to shell
+## To shell
 ```
-  docker exec -it the_alpineflask sh
+  docker exec -it alpfs00 sh
 ```
 
+
+## To stop
+
+```
+(test-venv) [lrm@lrmz-iMac-2017 ALPFS (rename2alpfs)]$ docker stop alpfs00
+alpfs00
+
+(test-venv) [lrm@lrmz-iMac-2017 ALPFS (rename2alpfs)]$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND             CREATED              STATUS                       PORTS     NAMES
+4599c0076e3a   alpfs     "python alpfs.py"   About a minute ago   Exited (137) 6 seconds ago             alpfs00
+
+(test-venv) [lrm@lrmz-iMac-2017 ALPFS (rename2alpfs)]$ docker rm alpfs00
+alpfs00
+
+
+```
 
 
 
