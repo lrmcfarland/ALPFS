@@ -7,40 +7,44 @@ server](https://flask.palletsprojects.com/en/2.0.x/) running on
 The docker image is just under 50 MB in size.
 
 
-# Virtual environment
+# To Run
 
-Use the python3 venv module to setup a test environment.
+## From the command line
 
-## Create the venv directory
+### Create a test environment
+
+Use the python3 venv module to setup a virtual test environment.
+
+#### Create the venv directory
 This is a one time setup
 ```
 $ python3 -m venv test-venv
 ```
-## Activate
+#### Activate
 This is needed each time a new shell is started for testing
 ```
 $ source test-venv/bin/activate
 ```
 
-## Install
+#### Install
 One time setup again
 
 ```
 $ pip install -r requirements.txt
 Collecting flask
   Downloading Flask-2.0.1-py3-none-any.whl (94 kB)
-     |████████████████████████████████| 94 kB 1.6 MB/s 
+     |████████████████████████████████| 94 kB 1.6 MB/s
 Collecting itsdangerous>=2.0
   Downloading itsdangerous-2.0.1-py3-none-any.whl (18 kB)
 Collecting Jinja2>=3.0
   Downloading Jinja2-3.0.1-py3-none-any.whl (133 kB)
-     |████████████████████████████████| 133 kB 7.9 MB/s 
+     |████████████████████████████████| 133 kB 7.9 MB/s
 Collecting click>=7.1.2
   Downloading click-8.0.1-py3-none-any.whl (97 kB)
-     |████████████████████████████████| 97 kB 9.3 MB/s 
+     |████████████████████████████████| 97 kB 9.3 MB/s
 Collecting Werkzeug>=2.0
   Downloading Werkzeug-2.0.1-py3-none-any.whl (288 kB)
-     |████████████████████████████████| 288 kB 62.4 MB/s 
+     |████████████████████████████████| 288 kB 62.4 MB/s
 Collecting MarkupSafe>=2.0
   Downloading MarkupSafe-2.0.1-cp39-cp39-macosx_10_9_x86_64.whl (13 kB)
 Installing collected packages: MarkupSafe, Werkzeug, Jinja2, itsdangerous, click, flask
@@ -50,11 +54,7 @@ You should consider upgrading via the '/Users/lrm/Documents/Computer/examples/te
 
 ```
 
-# To Run
-
-## From the command line
-
-In the activated test environment
+### In the activated test environment
 
 ```
 (test-venv) [lrm@lrmz-iMac-2017 ALPFS (main)]$ python3 alpfs.py
@@ -75,6 +75,23 @@ In the activated test environment
 ```
 
 The web page should now be available on http://localhost
+
+
+### Python Test
+
+test_alpfs.py has an example of a flask unit test.
+
+```
+(test-venv) [lrm@lrmz-iMac-2017 ALPFS (main)]$ python3 test_alpfs.py
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.016s
+
+OK
+
+
+```
+
 
 
 ## In a container
@@ -119,19 +136,19 @@ The web page should now be available on http://localhost:8080
 ```
 
 
-## To test
+### To test
 
 http://localhost:8080
 
 
 
-## To shell
+### To shell
 ```
   docker exec -it alpfs00 sh
 ```
 
 
-## To stop
+### To stop
 
 ```
 (test-venv) [lrm@lrmz-iMac-2017 ALPFS (rename2alpfs)]$ docker stop alpfs00
@@ -146,6 +163,3 @@ alpfs00
 
 
 ```
-
-
-

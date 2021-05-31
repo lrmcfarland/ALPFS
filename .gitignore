@@ -2,6 +2,11 @@
 
 test-venv
 
+# python
+
+__pycache__
+
+
 # os x
 
 .DS_Store

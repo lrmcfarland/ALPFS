@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 """alpine python baised flask server for testing
 
@@ -11,18 +10,15 @@ $ pip install -r requirements.txt
 
 To run
 
-
-$ python3 alpine_flask.py 
- * Serving Flask app 'squeaker' (lazy loading)
+(test-venv) [lrm@lrmz-iMac-2017 ALPFS (main)]$ python3 alpfs.py
+ * Serving Flask app 'alpfs' (lazy loading)
  * Environment: production
    WARNING: This is a development server. Do not use it in a production deployment.
    Use a production WSGI server instead.
  * Debug mode: off
-[2021-05-30 13:53:14,960 WARNING _internal.py 225]  * Running on all addresses.
+[2021-05-31 08:37:55,342 WARNING _internal.py 225]  * Running on all addresses.
    WARNING: This is a development server. Do not use it in a production deployment.
-[2021-05-30 13:53:14,960 INFO _internal.py 225]  * Running on http://192.168.4.26:80/ (Press CTRL+C to quit)
-
-
+[2021-05-31 08:37:55,343 INFO _internal.py 225]  * Running on http://192.168.4.26:80/ (Press CTRL+C to quit)
 
 
 """
