@@ -1,19 +1,31 @@
 {% extends "base.html" %}
 
-{% block title %}alpine flask test server{% endblock %}
+{% block title %}
+Alpine Linux Python Flask Server
+{% endblock %}
 
 {% block content %}
 
-<h1>Alpine-Flask test server</h1>
+<h1>Alpine Linux Python Flask Server</h1>
 
-<p>
-  This is an example of <a href="https://alpinelinux.org">Alpine Linux</a> running
-  <a href="https://flask.palletsprojects.com/en/2.0.x/">a Python flask server.</a>
+<div>
+  <p>
+    This is an example of <a href="https://alpinelinux.org">Alpine Linux</a> running
+    <a href="https://flask.palletsprojects.com/en/2.0.x/">a Python flask server.</a>
 
-</p>
+  </p>
+</div>
 
 <div id="status">
       Timestamp: {{ timestamp }}
+</div>
+
+<br>
+
+<div>
+  <a href="https://en.wikipedia.org/wiki/Ouroboros">
+    <img src="static/oroborous.png" width="100" height="100" alt="oroborous">
+  </a>
 </div>
 
 

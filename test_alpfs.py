@@ -43,7 +43,13 @@ class AlpfsTests(unittest.TestCase):
         a_response = self.client.get('/')
 
         self.assertEqual('200 OK', a_response.status)
-        self.assertIn(b'by starbug.com', a_response.data)
+
+        return
+
+    def test_starbug_link(self):
+
+        a_response = self.client.get('/')
+        self.assertIn(b'by <a href="https://www.starbug.com">starbug.com', a_response.data)
 
         return
 
