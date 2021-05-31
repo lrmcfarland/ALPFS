@@ -86,11 +86,21 @@ The web page should now be available on http://localhost
 ```
 ### To run
 
-With port 80 inside the container mapped to port 8080 on the outside
+
+```
+  docker run --name alpfs00 -d -p 80:80 alpfs
+```
+
+The web page should now be available on http://localhost
+
+
+With port 8080 on the outside mapped to port 80 on the inside
 
 ```
   docker run --name alpfs00 -d -p 8080:80 alpfs
 ```
+
+The web page should now be available on http://localhost:8080
 
 ### Logs
 
@@ -108,14 +118,6 @@ With port 80 inside the container mapped to port 8080 on the outside
 [2021-05-31 14:49:37,885 INFO _internal.py 225] 172.17.0.1 - - [31/May/2021 14:49:37] "GET /static/style.css HTTP/1.1" 200 -
 ```
 
-
-TODO Conflict with port 80
-
-```
-$ docker logs alpfs00
-SyntaxError: Non-UTF-8 code starting with '\x84' in file /bin/sh on line 2, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
-
-```
 
 ## To test
 
