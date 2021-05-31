@@ -4,7 +4,7 @@ This is an example of building a [python flask web
 server](https://flask.palletsprojects.com/en/2.0.x/) running on
 [Alpine Linux](https://alpinelinux.org) in a docker container.
 
-The docker image is just under 50 MB in size.
+The docker image is just over 50 MB in size.
 
 
 # To Run
@@ -124,7 +124,7 @@ The web page should now be available on http://localhost:8080
 ### Logs
 
 ```
-(venv-alpfs) [lrm@lrmz-iMac-2017 ALPFS (rename2alpfs)]$ docker logs alpfs00
+(venv-alpfs) [lrm@lrmz-iMac-2017 ALPFS (main)]$ docker logs alpfs00
  * Serving Flask app 'alpfs' (lazy loading)
  * Environment: production
    WARNING: This is a development server. Do not use it in a production deployment.
@@ -153,14 +153,14 @@ http://localhost:8080
 ### To stop
 
 ```
-(venv-alpfs) [lrm@lrmz-iMac-2017 ALPFS (rename2alpfs)]$ docker stop alpfs00
+(venv-alpfs) [lrm@lrmz-iMac-2017 ALPFS (main)]$ docker stop alpfs00
 alpfs00
 
-(venv-alpfs) [lrm@lrmz-iMac-2017 ALPFS (rename2alpfs)]$ docker ps -a
+(venv-alpfs) [lrm@lrmz-iMac-2017 ALPFS (main)]$ docker ps -a
 CONTAINER ID   IMAGE     COMMAND             CREATED              STATUS                       PORTS     NAMES
 4599c0076e3a   alpfs     "python alpfs.py"   About a minute ago   Exited (137) 6 seconds ago             alpfs00
 
-(venv-alpfs) [lrm@lrmz-iMac-2017 ALPFS (rename2alpfs)]$ docker rm alpfs00
+(venv-alpfs) [lrm@lrmz-iMac-2017 ALPFS (main)]$ docker rm alpfs00
 alpfs00
 
 
