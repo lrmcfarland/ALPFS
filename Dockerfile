@@ -39,7 +39,7 @@ ENV PATH ${PATH}:${USER_HOME}/.local/bin
 
 RUN pip install --upgrade pip
 
-WORKDIR ${HOME}/alpfs
+WORKDIR ${USER_HOME}/alpfs
 
 COPY requirements.txt .
 RUN pip install -r requirements.txt
