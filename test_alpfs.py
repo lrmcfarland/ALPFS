@@ -98,11 +98,16 @@ class AlpfsTests(unittest.TestCase):
     def test_post_whoareyou(self):
         """Test POST whoareyou API"""
 
-        a_response = self.client.post('/api/v0/whoareyou')
+        a_response = self.client.post('/api/v0/whoareyou', json={'foo':'bar', 'baz':42})
 
         self.assertEqual(200, a_response.status_code)
 
         self.assertIn('timestamp', a_response.json)
+
+        self.assertIn('args', a_response.json)
+
+        self.assertEqual('bar', a_response.json['args']['foo'])
+        self.assertEqual(42, a_response.json['args']['baz']) # TODO is int!
 
         return
 

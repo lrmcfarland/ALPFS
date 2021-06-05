@@ -81,8 +81,6 @@ def whoami():
 
     logging.info('whoami called')
 
-    logging.debug('query args %s', flask.request.args) # TODO
-
     a_response = dict()
     a_response['timestamp'] = time.strftime(ISO8601)
 
@@ -94,7 +92,6 @@ def whoami():
     return a_response
 
 
-
 @home_page.route('/api/v0/whoareyou', methods=['POST'])
 def whoareyou():
     """whoareyou POST example
@@ -104,14 +101,15 @@ def whoareyou():
 
     logging.info('whoareyou called')
 
-    logging.info('request %s', flask.request.get_json())
-
-
     a_response = dict()
     a_response['timestamp'] = time.strftime(ISO8601)
 
-    return a_response
+    # echo args back for testing
+    a_response['args'] = dict()
+    for key, val in flask.request.json.items():
+        a_response['args'][key] = val
 
+    return a_response
 
 
 # ================

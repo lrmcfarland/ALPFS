@@ -139,23 +139,15 @@ if __name__ == '__main__':
     # ----- run app -----
     # -------------------
 
+    # TODO /api/v0 added by this client won't work for http get foo = a_client.get('', an_api_version='')
+
 
     a_client = APIClient(args.host, args.port, a_schema=args.schema, use_verify=args.use_verify)
-
-
-    # TODO not for regular get foo = a_client.get('', an_api_version='')
-
 
     foo = a_client.get('whoami', params={'foo':'bar', 'baz':42})
 
     print(foo)
 
-    print(dir(foo))
-    print(foo.json())
-
-
-
-
-    foo = a_client.post('whoareyou')
+    foo = a_client.post('whoareyou', json={'foo':'bar', 'baz':42})
 
     print(foo)
