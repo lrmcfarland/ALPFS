@@ -13,10 +13,10 @@ import logging
 import requests
 
 
-class ALPFSClient(object):
+class APIClient(object):
 
-    def __init__(self, a_host, a_port=80, a_schema='http', an_api_version='api/v0/', use_verify=True):
-        """Construct a ALPFS client
+    def __init__(self, a_host, a_port=80, a_schema='http', an_api_version='api/v0', use_verify=True):
+        """Construct a ALPFS API client
 
         Args:
             a_host (str): FQDN or IP address of director
@@ -140,12 +140,20 @@ if __name__ == '__main__':
     # -------------------
 
 
-    a_client = ALPFSClient(args.host, args.port, a_schema=args.schema, use_verify=args.use_verify)
+    a_client = APIClient(args.host, args.port, a_schema=args.schema, use_verify=args.use_verify)
 
 
-    foo = a_client.get('whoami')
+    # TODO not for regular get foo = a_client.get('', an_api_version='')
+
+
+    foo = a_client.get('whoami', params={'foo':'bar', 'baz':42})
 
     print(foo)
+
+    print(dir(foo))
+    print(foo.json())
+
+
 
 
     foo = a_client.post('whoareyou')
