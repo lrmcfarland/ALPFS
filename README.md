@@ -85,7 +85,7 @@ The web page should now be available on http://localhost
 
 ### With client.py
 
-[client.py](https://github.com/lrmcfarland/ALPFS/blob/api_examples/client.py)
+[client.py](https://github.com/lrmcfarland/ALPFS/blob/main/client.py)
 is a python script that uses the python requests module to access the
 API.
 
@@ -102,6 +102,20 @@ API.
 <Response [200]>
 
 ```
+
+### With client.js
+
+[client.js](https://github.com/lrmcfarland/ALPFS/blob/main/client.js)
+is a node.js sketch of a script that uses the axios module to access the
+API.
+
+```
+% node client.js -u whoami -p 80 --host 0.0.0.0
+
+action response { args: {}, timestamp: '2021-06-06T09:02:51-0700' }
+
+```
+
 
 ### With Python unittest
 

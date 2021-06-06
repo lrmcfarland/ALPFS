@@ -1,8 +1,12 @@
 # alpine-flask example
 
-venv-alpfs
+
+# node
+node_modules
 
 # python
+
+venv-alpfs
 
 __pycache__
 
