@@ -4,7 +4,7 @@
 
 To setup a test virtual environment
 
-$ python3 -m venv test-venv
+$ python3 -m venv test-venv1
 $ source test-venv/bin/activate
 $ pip install -r requirements.txt
 
@@ -71,6 +71,8 @@ def index():
 
     a_response = dict()
     a_response['timestamp'] = time.strftime(ISO8601)
+    a_response['host'] = flask.request.host
+    a_response['remote_addr'] = flask.request.remote_addr
 
     return flask.render_template('home.html', **a_response)
 
@@ -86,6 +88,8 @@ def whoami():
 
     a_response = dict()
     a_response['timestamp'] = time.strftime(ISO8601)
+    a_response['host'] = flask.request.host
+    a_response['remote_addr'] = flask.request.remote_addr
 
     # echo args back for testing
     a_response['args'] = dict()
@@ -106,6 +110,8 @@ def whoareyou():
 
     a_response = dict()
     a_response['timestamp'] = time.strftime(ISO8601)
+    a_response['host'] = flask.request.host
+    a_response['remote_addr'] = flask.request.remote_addr
 
     # echo args back for testing
     a_response['args'] = dict()
