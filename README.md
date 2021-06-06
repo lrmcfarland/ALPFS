@@ -1,32 +1,33 @@
 # Alpine Linux Python Flask Server
 
-This is an example of building a [python flask web
-server](https://flask.palletsprojects.com/en/2.0.x/) running on
+This is an example of a [python flask server](https://flask.palletsprojects.com/en/2.0.x/) running on
 [Alpine Linux](https://alpinelinux.org) in a docker container.
-
 The docker image is just over 50 MB in size.
 
 
-# To Run
+# From the command line
 
-## From the command line
-
-### Create a test environment
+## Create a test environment
 
 Use the python3 venv module to setup a virtual test environment.
 
-#### Create the venv directory
+### Create the venv directory
+
 This is a one time setup
 ```
     python3 -m venv venv-alpfs
 ```
-#### Activate
+
+### Activate
+
 This is needed each time a new shell is started for testing
+
 ```
     source venv-alpfs/bin/activate
 ```
 
-#### Install
+### Install
+
 One time setup again
 
 ```
@@ -54,10 +55,10 @@ Successfully installed Jinja2-3.0.1 MarkupSafe-2.0.1 Werkzeug-2.0.1 click-8.0.1 
 
 ```
 
-### In the activated test environment
+## In the activated test environment
 
 ```
-    python3 alpfs.py
+% ./alpfs.py -l debug
 
 
  * Serving Flask app 'alpfs' (lazy loading)
@@ -75,14 +76,14 @@ Successfully installed Jinja2-3.0.1 MarkupSafe-2.0.1 Werkzeug-2.0.1 click-8.0.1 
 ```
 
 
-### To test
+## To test
 
-#### With a browser
+### With a browser
 
 The web page should now be available on http://localhost
 
 
-#### With client.py
+### With client.py
 
 [client.py](https://github.com/lrmcfarland/ALPFS/blob/api_examples/client.py)
 is a python script that uses the python requests module to access the
@@ -102,7 +103,7 @@ API.
 
 ```
 
-#### With Python unittest
+### With Python unittest
 
 [test_alpfs.py](https://github.com/lrmcfarland/ALPFS/blob/main/test_alpfs.py)
 is an example using the built in python unittest module with flask's
@@ -136,14 +137,15 @@ OK
 
 
 
-## In a container
+# In a container
 
-### To build
+## To build
 
 ```
     docker build -f Dockerfile -t alpfs .
 ```
-### To run
+
+## To run
 
 
 ```
@@ -161,7 +163,7 @@ With port 8080 on the outside mapped to port 80 on the inside
 
 The web page should now be available on http://localhost:8080
 
-### Logs
+## Logs
 
 ```
 $ docker logs alpfs00
@@ -178,7 +180,7 @@ $ docker logs alpfs00
 ```
 
 
-### To shell
+## Shell
 
 Use docker exec to open a shell in the container
 
@@ -187,7 +189,7 @@ Use docker exec to open a shell in the container
 ```
 
 
-### To stop
+## To stop
 
 ```
 $ docker stop alpfs00

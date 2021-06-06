@@ -20,7 +20,6 @@ OK
 
 """
 
-import argparse
 import logging
 import unittest
 
