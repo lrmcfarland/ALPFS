@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""alpine python baised flask server for testing
+"""alpine python based flask server for testing
 
 To setup a test virtual environment
 
@@ -10,7 +10,7 @@ $ pip install -r requirements.txt
 
 To run
 
-(test-venv) [lrm@lrmz-iMac-2017 ALPFS (main)]$ python3 alpfs.py
+$ python3 alpfs.py
  * Serving Flask app 'alpfs' (lazy loading)
  * Environment: production
    WARNING: This is a development server. Do not use it in a production deployment.
@@ -25,6 +25,7 @@ To run
 
 
 import argparse
+import json
 import logging
 import os
 import time
@@ -39,6 +40,9 @@ ISO8601 = '%Y-%m-%dT%H:%M:%S%z'
 
 home_page = flask.Blueprint('home_blueprint', __name__, template_folder='templates')
 
+# ---------------------
+# ----- functions -----
+# ---------------------
 
 def factory(config_flnm=None):
     """Creates squaker
@@ -57,21 +61,58 @@ def factory(config_flnm=None):
     return app
 
 
-
 @home_page.route('/')
 def index():
-    """Home page"""
+    """Home page
+
+    returns HTML
+    """
     logging.info('index called')
 
-    response = dict()
-    response['timestamp'] = time.strftime(ISO8601)
+    a_response = dict()
+    a_response['timestamp'] = time.strftime(ISO8601)
 
-    return flask.render_template('home.html', **response)
-
-
+    return flask.render_template('home.html', **a_response)
 
 
+@home_page.route('/api/v0/whoami')
+def whoami():
+    """whoami GET example
 
+    returns JSON
+    """
+
+    logging.info('whoami called')
+
+    a_response = dict()
+    a_response['timestamp'] = time.strftime(ISO8601)
+
+    # echo args back for testing
+    a_response['args'] = dict()
+    for key, val in flask.request.args.items():
+        a_response['args'][key] = val
+
+    return a_response
+
+
+@home_page.route('/api/v0/whoareyou', methods=['POST'])
+def whoareyou():
+    """whoareyou POST example
+
+    returns JSON
+    """
+
+    logging.info('whoareyou called')
+
+    a_response = dict()
+    a_response['timestamp'] = time.strftime(ISO8601)
+
+    # echo args back for testing
+    a_response['args'] = dict()
+    for key, val in flask.request.json.items():
+        a_response['args'][key] = val
+
+    return a_response
 
 
 # ================
@@ -90,7 +131,7 @@ if __name__ == '__main__':
                 'port': 80,
                 'debug': False}
 
-    parser = argparse.ArgumentParser(description='simple flask server for testing')
+    parser = argparse.ArgumentParser(description='alpine linux python flask server')
 
     parser.add_argument('-f', '--config', type=str, dest='config', default=None,
                         metavar='config',

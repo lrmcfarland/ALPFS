@@ -6,6 +6,8 @@ venv-alpfs
 
 __pycache__
 
+*.pyc
+
 
 # os x
 

@@ -1,3 +1,6 @@
-# squeaker requirements
+# ALPFS python modules
+#
+# pip install -r requirements
 
 flask
+requests

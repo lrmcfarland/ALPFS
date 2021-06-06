@@ -39,6 +39,7 @@ class AlpfsTests(unittest.TestCase):
 
 
     def test_home_page(self):
+        """Test home page"""
 
         a_response = self.client.get('/')
 
@@ -46,7 +47,9 @@ class AlpfsTests(unittest.TestCase):
 
         return
 
+
     def test_starbug_link(self):
+        """Test home page has starbug.com link"""
 
         a_response = self.client.get('/')
         self.assertIn(b'by <a href="https://www.starbug.com">starbug.com', a_response.data)
@@ -54,6 +57,67 @@ class AlpfsTests(unittest.TestCase):
         return
 
 
+    def test_get_whoami(self):
+        """Test GET whoami API"""
+
+        a_response = self.client.get('/api/v0/whoami', query_string={'foo':'bar', 'baz':42})
+
+        self.assertEqual(200, a_response.status_code)
+
+        self.assertIn('timestamp', a_response.json)
+        self.assertIn('args', a_response.json)
+
+        self.assertEqual('bar', a_response.json['args']['foo'])
+        self.assertEqual(str(42), a_response.json['args']['baz']) # TODO as int?
+
+
+        return
+
+
+    def test_post_whoami(self):
+        """Test POST whoami API fails"""
+
+        a_response = self.client.post('/api/v0/whoami')
+
+        self.assertEqual(405, a_response.status_code)
+
+        return
+
+
+    def test_get_whoareyou(self):
+        """Test GET whoareyou API fails"""
+
+        a_response = self.client.get('/api/v0/whoareyou')
+
+        self.assertEqual(405, a_response.status_code)
+
+        return
+
+
+    def test_post_whoareyou(self):
+        """Test POST whoareyou API"""
+
+        a_response = self.client.post('/api/v0/whoareyou', json={'foo':'bar', 'baz':42})
+
+        self.assertEqual(200, a_response.status_code)
+
+        self.assertIn('timestamp', a_response.json)
+
+        self.assertIn('args', a_response.json)
+
+        self.assertEqual('bar', a_response.json['args']['foo'])
+        self.assertEqual(42, a_response.json['args']['baz']) # TODO is int!
+
+        return
+
+
+
+
+# ================
+# ===== main =====
+# ================
 
 if __name__ == '__main__':
+
+
     unittest.main()
