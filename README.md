@@ -14,8 +14,9 @@ Use the python3 venv module to setup a virtual test environment.
 ### Create the venv directory
 
 This is a one time setup
+
 ```
-    python3 -m venv venv-alpfs
+python3 -m venv venv-alpfs
 ```
 
 ### Activate
@@ -23,7 +24,7 @@ This is a one time setup
 This is needed each time a new shell is started for testing
 
 ```
-    source venv-alpfs/bin/activate
+source venv-alpfs/bin/activate
 ```
 
 ### Install
@@ -31,36 +32,17 @@ This is needed each time a new shell is started for testing
 One time setup again
 
 ```
-    pip install -r requirements.txt
-
-Collecting flask
-  Downloading Flask-2.0.1-py3-none-any.whl (94 kB)
-     |████████████████████████████████| 94 kB 1.6 MB/s
-Collecting itsdangerous>=2.0
-  Downloading itsdangerous-2.0.1-py3-none-any.whl (18 kB)
-Collecting Jinja2>=3.0
-  Downloading Jinja2-3.0.1-py3-none-any.whl (133 kB)
-     |████████████████████████████████| 133 kB 7.9 MB/s
-Collecting click>=7.1.2
-  Downloading click-8.0.1-py3-none-any.whl (97 kB)
-     |████████████████████████████████| 97 kB 9.3 MB/s
-Collecting Werkzeug>=2.0
-  Downloading Werkzeug-2.0.1-py3-none-any.whl (288 kB)
-     |████████████████████████████████| 288 kB 62.4 MB/s
-Collecting MarkupSafe>=2.0
-  Downloading MarkupSafe-2.0.1-cp39-cp39-macosx_10_9_x86_64.whl (13 kB)
-Installing collected packages: MarkupSafe, Werkzeug, Jinja2, itsdangerous, click, flask
-Successfully installed Jinja2-3.0.1 MarkupSafe-2.0.1 Werkzeug-2.0.1 click-8.0.1 flask-2.0.1 itsdangerous-2.0.1
-
+pip install -r requirements.txt
 
 ```
 
 ## In the activated test environment
 
 ```
-% ./alpfs.py -l debug
+./alpfs.py -l debug
+```
 
-
+```
  * Serving Flask app 'alpfs' (lazy loading)
  * Environment: production
    WARNING: This is a development server. Do not use it in a production deployment.
@@ -91,7 +73,10 @@ API.
 
 
 ```
-% ./client.py -l debug
+./client.py -l debug
+```
+
+```
 [2021-06-06 07:04:08,525 DEBUG client.py 57] GET http://localhost:80/api/v0/whoami headers: None, params: {'foo': 'bar', 'baz': 42}
 [2021-06-06 07:04:08,536 DEBUG connectionpool.py 227] Starting new HTTP connection (1): localhost:80
 [2021-06-06 07:04:08,538 DEBUG connectionpool.py 452] http://localhost:80 "GET /api/v0/whoami?foo=bar&baz=42 HTTP/1.1" 200 73
@@ -110,10 +95,11 @@ is a node.js sketch of a script that uses the axios module to access the
 API.
 
 ```
-% node client.js -u whoami
+node client.js -u whoami
+```
 
+```
 action response { args: {}, timestamp: '2021-06-06T09:02:51-0700' }
-
 ```
 
 
@@ -126,7 +112,10 @@ another process.
 
 
 ```
-% python3 test_alpfs.py -v
+python3 test_alpfs.py -v
+```
+
+```
 test_get_whoami (__main__.AlpfsTests)
 Test GET whoami API ... ok
 test_get_whoareyou (__main__.AlpfsTests)
@@ -156,14 +145,14 @@ OK
 ## To build
 
 ```
-    docker build -f Dockerfile -t alpfs .
+docker build -f Dockerfile -t alpfs .
 ```
 
 ## To run
 
 
 ```
-    docker run --name alpfs00 -d -p 80:80 alpfs
+docker run --name alpfs00 -d -p 80:80 alpfs
 ```
 
 The web page should now be available on http://localhost
@@ -172,7 +161,7 @@ The web page should now be available on http://localhost
 With port 8080 on the outside mapped to port 80 on the inside
 
 ```
-    docker run --name alpfs00 -d -p 8080:80 alpfs
+docker run --name alpfs00 -d -p 8080:80 alpfs
 ```
 
 The web page should now be available on http://localhost:8080
@@ -180,8 +169,11 @@ The web page should now be available on http://localhost:8080
 ## Logs
 
 ```
-$ docker logs alpfs00
- * Serving Flask app 'alpfs' (lazy loading)
+docker logs alpfs00
+```
+
+```
+* Serving Flask app 'alpfs' (lazy loading)
  * Environment: production
    WARNING: This is a development server. Do not use it in a production deployment.
    Use a production WSGI server instead.
@@ -199,22 +191,28 @@ $ docker logs alpfs00
 Use docker exec to open a shell in the container
 
 ```
-    docker exec -it alpfs00 sh
+docker exec -it alpfs00 sh
 ```
 
 
 ## To stop
 
 ```
-$ docker stop alpfs00
-alpfs00
+docker stop alpfs00
+```
 
-$ docker ps -a
+```
+docker ps -a
+```
+
+```
 CONTAINER ID   IMAGE     COMMAND             CREATED              STATUS                       PORTS     NAMES
 4599c0076e3a   alpfs     "python alpfs.py"   About a minute ago   Exited (137) 6 seconds ago             alpfs00
+```
 
-$ docker rm alpfs00
-alpfs00
+## to remove
 
-
+```
+docker rm alpfs00
+docker rmi alpfs
 ```
