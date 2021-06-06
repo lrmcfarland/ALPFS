@@ -110,7 +110,7 @@ is a node.js sketch of a script that uses the axios module to access the
 API.
 
 ```
-% node client.js -u whoami -p 80 --host 0.0.0.0
+% node client.js -u whoami
 
 action response { args: {}, timestamp: '2021-06-06T09:02:51-0700' }
 
