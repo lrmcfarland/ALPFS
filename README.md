@@ -170,7 +170,7 @@ The web page should now be available on http://localhost:8080
 ### Logs
 
 ```
-(venv-alpfs) [lrm@lrmz-iMac-2017 ALPFS (main)]$ docker logs alpfs00
+$ docker logs alpfs00
  * Serving Flask app 'alpfs' (lazy loading)
  * Environment: production
    WARNING: This is a development server. Do not use it in a production deployment.
@@ -184,13 +184,10 @@ The web page should now be available on http://localhost:8080
 ```
 
 
-### To test
-
-http://localhost:8080
-
-
-
 ### To shell
+
+Use docker exec to open a shell in the container
+
 ```
     docker exec -it alpfs00 sh
 ```
@@ -199,14 +196,14 @@ http://localhost:8080
 ### To stop
 
 ```
-(venv-alpfs) [lrm@lrmz-iMac-2017 ALPFS (main)]$ docker stop alpfs00
+$ docker stop alpfs00
 alpfs00
 
-(venv-alpfs) [lrm@lrmz-iMac-2017 ALPFS (main)]$ docker ps -a
+$ docker ps -a
 CONTAINER ID   IMAGE     COMMAND             CREATED              STATUS                       PORTS     NAMES
 4599c0076e3a   alpfs     "python alpfs.py"   About a minute ago   Exited (137) 6 seconds ago             alpfs00
 
-(venv-alpfs) [lrm@lrmz-iMac-2017 ALPFS (main)]$ docker rm alpfs00
+$ docker rm alpfs00
 alpfs00
 
 
