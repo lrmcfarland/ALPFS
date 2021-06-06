@@ -68,8 +68,6 @@ Successfully installed Jinja2-3.0.1 MarkupSafe-2.0.1 Werkzeug-2.0.1 click-8.0.1 
 [2021-05-31 07:40:37,558 WARNING _internal.py 225]  * Running on all addresses.
    WARNING: This is a development server. Do not use it in a production deployment.
 [2021-05-31 07:40:37,558 INFO _internal.py 225]  * Running on http://192.168.4.26:80/ (Press CTRL+C to quit)
-[2021-05-31 07:41:37,582 INFO _internal.py 225] 127.0.0.1 - - [31/May/2021 07:41:37] "GET / HTTP/1.1" 200 -
-[2021-05-31 07:41:37,591 INFO _internal.py 225] 127.0.0.1 - - [31/May/2021 07:41:37] "GET /static/style.css HTTP/1.1" 200 -
 
 
 ^C
@@ -79,20 +77,68 @@ Successfully installed Jinja2-3.0.1 MarkupSafe-2.0.1 Werkzeug-2.0.1 click-8.0.1 
 The web page should now be available on http://localhost
 
 
-### Python Test
+### To test
 
-test_alpfs.py has an example of a flask unit test.
+#### browser
+
+With the server running, the home page should be accessible with a browser
 
 ```
-(venv-alpfs) [lrm@lrmz-iMac-2017 ALPFS (main)]$ python3 test_alpfs.py
-.
+http://localhost/
+```
+
+
+#### client.py
+
+[client.py](https://github.com/lrmcfarland/ALPFS/blob/api_examples/client.py)
+is a python script that uses the python requests module to access the
+API.
+
+
+```
+% ./client.py -l debug
+[2021-06-06 07:04:08,525 DEBUG client.py 57] GET http://localhost:80/api/v0/whoami headers: None, params: {'foo': 'bar', 'baz': 42}
+[2021-06-06 07:04:08,536 DEBUG connectionpool.py 227] Starting new HTTP connection (1): localhost:80
+[2021-06-06 07:04:08,538 DEBUG connectionpool.py 452] http://localhost:80 "GET /api/v0/whoami?foo=bar&baz=42 HTTP/1.1" 200 73
+<Response [200]>
+[2021-06-06 07:04:08,539 DEBUG client.py 76] POST http://localhost:80/api/v0/whoareyou headers: None, JSON:{'foo': 'bar', 'baz': 42},  files:None
+[2021-06-06 07:04:08,540 DEBUG connectionpool.py 227] Starting new HTTP connection (1): localhost:80
+[2021-06-06 07:04:08,542 DEBUG connectionpool.py 452] http://localhost:80 "POST /api/v0/whoareyou HTTP/1.1" 200 71
+<Response [200]>
+
+```
+
+#### Python unittest
+
+[test_alpfs.py](https://github.com/lrmcfarland/ALPFS/blob/main/test_alpfs.py)
+is an example using the built in python unittest module with flask's
+built in test client and does not need to have the server running in
+another process.
+
+
+```
+% python3 test_alpfs.py -v
+test_get_whoami (__main__.AlpfsTests)
+Test GET whoami API ... ok
+test_get_whoareyou (__main__.AlpfsTests)
+Test GET whoareyou API fails ... ok
+test_home_page (__main__.AlpfsTests)
+Test home page ... ok
+test_post_whoami (__main__.AlpfsTests)
+Test POST whoami API fails ... ok
+test_post_whoareyou (__main__.AlpfsTests)
+Test POST whoareyou API ... ok
+test_starbug_link (__main__.AlpfsTests)
+Test home page has starbug.com link ... ok
+
 ----------------------------------------------------------------------
-Ran 1 test in 0.016s
+Ran 6 tests in 0.034s
 
 OK
 
-
 ```
+
+
 
 
 

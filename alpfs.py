@@ -40,6 +40,9 @@ ISO8601 = '%Y-%m-%dT%H:%M:%S%z'
 
 home_page = flask.Blueprint('home_blueprint', __name__, template_folder='templates')
 
+# ---------------------
+# ----- functions -----
+# ---------------------
 
 def factory(config_flnm=None):
     """Creates squaker
