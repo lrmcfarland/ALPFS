@@ -74,21 +74,15 @@ Successfully installed Jinja2-3.0.1 MarkupSafe-2.0.1 Werkzeug-2.0.1 click-8.0.1 
 
 ```
 
-The web page should now be available on http://localhost
-
 
 ### To test
 
-#### browser
+#### With a browser
 
-With the server running, the home page should be accessible with a browser
-
-```
-http://localhost/
-```
+The web page should now be available on http://localhost
 
 
-#### client.py
+#### With client.py
 
 [client.py](https://github.com/lrmcfarland/ALPFS/blob/api_examples/client.py)
 is a python script that uses the python requests module to access the
@@ -108,7 +102,7 @@ API.
 
 ```
 
-#### Python unittest
+#### With Python unittest
 
 [test_alpfs.py](https://github.com/lrmcfarland/ALPFS/blob/main/test_alpfs.py)
 is an example using the built in python unittest module with flask's
