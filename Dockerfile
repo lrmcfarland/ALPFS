@@ -50,7 +50,7 @@ ADD static static
 
 # run app
 
-EXPOSE 80
+EXPOSE 8080
 
 ENTRYPOINT ["python"]
-CMD [ "alpfs.py" ]
+CMD [ "alpfs.py", "-p", "8080" ]

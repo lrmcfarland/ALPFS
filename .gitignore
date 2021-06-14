@@ -1,4 +1,7 @@
-# alpine-flask example
+# alpine linux python flask server example
+
+*.pem
+publicip.txt
 
 
 # node
@@ -12,6 +15,12 @@ __pycache__
 
 *.pyc
 
+# terraform
+
+terraform.*
+.terraform*
+
+envvars.sh
 
 # os x
 

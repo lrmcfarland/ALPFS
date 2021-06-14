@@ -1,11 +1,23 @@
-# Alpine Linux Python Flask Server
+The purpose of this project is to demonstrate how to use terraform to
+create an EC2 instance on AWS and deploy an [Alpine
+Linux](https://alpinelinux.org) [Python Flask
+server](https://flask.palletsprojects.com/en/2.0.x/) (ALPFS) in a
+docker container there.
+In this example I build the container from this repo and pull it from my DockerHub account.
 
-This is an example of a [python flask server](https://flask.palletsprojects.com/en/2.0.x/) running on
-[Alpine Linux](https://alpinelinux.org) in a docker container.
-The docker image is just over 50 MB in size.
+This follows from
+[DDoS-attack-detection-using-HTTP-packet-clustering-pattern](https://github.com/gurpreet0610/DDoS-attack-detection-using-HTTP-packet-clustering-pattern)
+and thanks to gurpreet0610 for sharing that and [In terraform, how can
+I pull a Docker image on the
+target?](https://stackoverflow.com/questions/64809479/in-terraform-how-can-i-pull-a-docker-image-on-the-target)
+for suggeting it.
 
 
-# From the command line
+
+
+# Python Flask Server
+
+From the command line
 
 ## Create a test environment
 
@@ -92,7 +104,7 @@ API.
 
 [client.js](https://github.com/lrmcfarland/ALPFS/blob/main/client.js)
 is a node.js sketch of a script that uses the axios module to access the
-API.
+API. You will need to run npm install.
 
 ```
 node client.js -u whoami
@@ -138,9 +150,8 @@ OK
 
 
 
+# Alpine Linux container
 
-
-# In a container
 
 ## To build
 
@@ -210,9 +221,23 @@ CONTAINER ID   IMAGE     COMMAND             CREATED              STATUS        
 4599c0076e3a   alpfs     "python alpfs.py"   About a minute ago   Exited (137) 6 seconds ago             alpfs00
 ```
 
-## to remove
+
+## Tag and push to DockerHub
+
+```
+docker tag alpfs lrmcfarland/alpfs
+docker push lrmcfarland/alpfs
+
+```
+
+## To remove
 
 ```
 docker rm alpfs00
 docker rmi alpfs
 ```
+
+
+# Terraform
+
+see [README.md](terraform/README.md)
