@@ -58,14 +58,14 @@ This will also implicitly select your package manager, i.e. yum for RHEL
 and apt-get for Debian distributions.
 In this example I used snap to install docker and found
 `snap wait system seed.loaded` necessary to avoid startup
-race conditions (see EC2_instance.tf)
+race conditions (see [EC2_instance.tf](EC2_instance.tf))
 Also this choice may affect your connection user, i.e. may be 'ubuntu' instead of 'ec2-user'
-when connecting in EC2_instance.tf or ALPFS.tf.
+when connecting in [EC2_instance.tf](EC2_instance.tf) or [ALPFS.tf](ALPFS.tf).
 
 
 ## variables.tf
 
-The above information is collected in variables.ty either by prompting
+The above information is collected in [variables.tf](variables.tf) either by prompting
 when run or from TF_VAR environemnt variables.
 
 ```
@@ -74,8 +74,8 @@ when run or from TF_VAR environemnt variables.
 export TF_VAR_aws_access_key=<aws access key>
 export TF_VAR_aws_secret_key=<aws secret key>
 
-export TF_VAR_docker_repo="alpfs"
-export TF_VAR_docker_user="lrmcfarland"
+export TF_VAR_docker_repo=<container to deploy, e.g. "alpfs">
+export TF_VAR_docker_user=<docker user, e.g. lrmcfarland>
 export TF_VAR_docker_access_token=<docker access token>
 
 ```
@@ -133,7 +133,6 @@ terraform apply
 ```
 
 You should see the instance come up on your EC2 dashboard with the public IP and FQDN.
-
 You should also be able to see the home page on the public IP or FQDN, port 8080.
 
 In this case [http://ec2-54-176-39-221.us-west-1.compute.amazonaws.com:8080](http://ec2-54-176-39-221.us-west-1.compute.amazonaws.com:8080)
@@ -145,13 +144,13 @@ Note: this will change each time it is launched.
 
 These scripts will output two files to the local directory: alpfs_key.pem and publicip.txt.
 These contain the private key and public IP of the instance if successful.
-
 To use the alpfs_key.pem file you will need to change the permissions, but if you
 change the permissions of this file to read only, the next build will fail when it
 trys to overwrite it. I found using a copy to be helpful.
 
 
 ```
+rm -f true_alpfs_key.pem
 cp alpfs_key.pem true_alpfs_key.pem
 chmod 400 true_alpfs_key.pem
 ssh -i true_alpfs_key.pem ubuntu@`cat publicip.txt`
@@ -181,7 +180,13 @@ The list of available updates is more than a week old.
 To check for new updates run: sudo apt update
 
 Last login: Mon Jun 14 17:39:47 2021 from 73.158.190.51
-ubuntu@ip-172-31-16-128:~$ 
+ubuntu@ip-172-31-16-128:~$
+
+ubuntu@ip-172-31-17-30:~$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                            NAMES
+2dc54f654de4        lrmcfarland/alpfs   "python alpfs.py -p …"   11 minutes ago      Up 11 minutes       80/tcp, 0.0.0.0:8080->8080/tcp   alpfs8080
+
+
 
 ```
 
