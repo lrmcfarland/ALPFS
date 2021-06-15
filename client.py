@@ -144,10 +144,10 @@ if __name__ == '__main__':
 
     a_client = APIClient(args.host, args.port, a_schema=args.schema, use_verify=args.use_verify)
 
-    foo = a_client.get('whoami', params={'foo':'bar', 'baz':42})
+    a_response = a_client.get('whoami', params={'name':'alpfs', 'e':2.7182})
 
-    print(foo)
+    print('GET /api/v0/whoami', a_response.json())
 
-    foo = a_client.post('whoareyou', json={'foo':'bar', 'baz':42})
+    a_response = a_client.post('whoareyou', json={'name':'lrmcfarland', 'uri':'starbug.com'})
 
-    print(foo)
+    print('POST /api/v0/whoareyou', a_response.json())
