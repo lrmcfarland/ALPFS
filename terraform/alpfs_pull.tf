@@ -1,6 +1,6 @@
-# start ALPFS
+# pull docker image
 
-resource "null_resource" "launch_alpfs"  {
+resource "null_resource" "alpfs_docker_pull"  {
 
 depends_on = [
     aws_instance.alpfs
@@ -17,9 +17,7 @@ provisioner "remote-exec" {
     inline = [
       "docker login --username ${var.docker_user} --password ${var.docker_access_token}",
       "docker pull ${var.docker_user}/${var.docker_repo}",
-      "docker images",
-      "docker run --name alpfs8080 -d -p 8080:8080 ${var.docker_user}/${var.docker_repo}",
-      "docker logs alpfs8080"
+      "docker images"
     ]
   }
 }
