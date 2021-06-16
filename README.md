@@ -1,18 +1,14 @@
-The purpose of this repo is to demonstrate how to use
-[terraform](https://www.terraform.io) to create an EC2 instance on AWS
-and deploy an [Alpine Linux](https://alpinelinux.org) [Python Flask
-server](https://flask.palletsprojects.com/en/2.0.x/) (ALPFS) in a
-docker container there. In this example I build the container from
-this repo and pull it from my DockerHub account.
-
+This is an example of how to create a [Python Flask web
+server](https://flask.palletsprojects.com/en/2.0.x/), run it in an
+[Alpine Linux](https://alpinelinux.org) docker container and deploy
+that container to an EC2 instance on AWS using
+[terraform](https://www.terraform.io).
 This follows from
 [DDoS-attack-detection-using-HTTP-packet-clustering-pattern](https://github.com/gurpreet0610/DDoS-attack-detection-using-HTTP-packet-clustering-pattern)
 and thanks to gurpreet0610 for sharing that and [In terraform, how can
 I pull a Docker image on the
 target?](https://stackoverflow.com/questions/64809479/in-terraform-how-can-i-pull-a-docker-image-on-the-target)
 for suggeting it.
-
-
 
 
 # Python Flask Server
