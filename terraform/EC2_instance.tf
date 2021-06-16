@@ -1,17 +1,14 @@
-# starbug.com
-# Creating AWS EC2 Instance
-
-# TODO ami, region, instance_type from envvars?
+# Create an AWS EC2 Instance with docker running
 
 resource "aws_instance" "alpfs" {
-  ami           = "ami-0d382e80be7ffdae5"
-  instance_type = "t2.micro"
+  ami           = var.aws_ami
+  instance_type = var.aws_instance_type
   key_name = aws_key_pair.generated_key.key_name
   security_groups = [ "${aws_security_group.allow_ALPFS_and_SSH.name}" ]
 
   connection {
     type     = "ssh"
-    user     = "ubuntu"
+    user     = var.ami_user
     private_key = tls_private_key.createkey.private_key_pem
     host     = aws_instance.alpfs.public_ip
   }

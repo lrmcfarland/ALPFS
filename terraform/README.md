@@ -72,6 +72,11 @@ when run or from TF_VAR environemnt variables.
 ```
 #!/usr/bin/env zsh
 
+export TF_VAR_aws_ami=ami-0d382e80be7ffdae5
+export TF_VAR_aws_region=us-west-1
+export TF_VAR_aws_instance_type=t2.micro
+export TF_VAR_aws_ami_user=ubuntu
+
 export TF_VAR_aws_access_key=<aws access key>
 export TF_VAR_aws_secret_key=<aws secret key>
 
@@ -82,13 +87,38 @@ export TF_VAR_docker_access_token=<docker access token>
 ```
 
 
+### AWS Amazon Machine Image
+
+You will need to pick an Amazon Machine Image (AMI) appropriate for
+your region.  At this time I am using ami-0d382e80be7ffdae5 for my
+2021 us-west-1 region.
+This will also implicitly select your package
+manager, i.e. yum for RHEL and apt-get for Debian distributions.
+In this example I used snap to install docker with `snap wait system
+seed.loaded` to avoid startup race conditions (see
+[EC2_instance.tf](EC2_instance.tf))
+Also this choice may affect your
+connection user, i.e. may be 'ubuntu' instead of 'ec2-user' when
+connecting in [EC2_instance.tf](EC2_instance.tf),
+[alpfs_pull.tf](alpfs_pull.tf) or [alpfs_run.tf](alpfs_run.tf).
+
+
+### AWS Region
+
+This is tied to the AMI above.
+
+### AWS Instance type
+
+This is also tied to the AMI above.
+
+
 ### AWS Access key
 
-AWS access key generaged above.
+Use the AWS access key generaged for the acccout (see above).
 
 ### AWS Secret key
 
-AWS secret key generaged above.
+Use the AWS secret key generaged for the acccout (see above).
 
 
 ### Docker Repo
