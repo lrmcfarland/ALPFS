@@ -1,9 +1,9 @@
-The purpose of this project is to demonstrate how to use terraform to
-create an EC2 instance on AWS and deploy an [Alpine
-Linux](https://alpinelinux.org) [Python Flask
+The purpose of this repo is to demonstrate how to use
+[terraform](https://www.terraform.io) to create an EC2 instance on AWS
+and deploy an [Alpine Linux](https://alpinelinux.org) [Python Flask
 server](https://flask.palletsprojects.com/en/2.0.x/) (ALPFS) in a
-docker container there.
-In this example I build the container from this repo and pull it from my DockerHub account.
+docker container there. In this example I build the container from
+this repo and pull it from my DockerHub account.
 
 This follows from
 [DDoS-attack-detection-using-HTTP-packet-clustering-pattern](https://github.com/gurpreet0610/DDoS-attack-detection-using-HTTP-packet-clustering-pattern)
@@ -230,14 +230,8 @@ docker push lrmcfarland/alpfs
 
 ```
 
-## To remove
-
-```
-docker rm alpfs00
-docker rmi alpfs
-```
-
+The tag is used by terraform to pull this image from [DockerHub](https://hub.docker.com).
 
 # Terraform
 
-see [README.md](terraform/README.md)
+see [terraform/README.md](terraform/README.md)

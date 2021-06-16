@@ -51,16 +51,17 @@ WARNING! Your password will be stored unencrypted in /home/ubuntu/snap/docker/79
 
 # To configure
 
-You will need to pick an Amazon Machine Image (AMI) appropriate for your region.
-At the moment, I have this hard-coded in [EC2_instance.tf](EC2_instance.tf) to
-ami-0d382e80be7ffdae5 for my 2021 us-west-1 region.
-This will also implicitly select your package manager, i.e. yum for RHEL
-and apt-get for Debian distributions.
-In this example I used snap to install docker and found
-`snap wait system seed.loaded` necessary to avoid startup
-race conditions (see [EC2_instance.tf](EC2_instance.tf))
-Also this choice may affect your connection user, i.e. may be 'ubuntu' instead of 'ec2-user'
-when connecting in [EC2_instance.tf](EC2_instance.tf) or [ALPFS.tf](ALPFS.tf).
+You will need to pick an Amazon Machine Image (AMI) appropriate for
+your region.  At the moment, I have this hard-coded in
+[EC2_instance.tf](EC2_instance.tf) to ami-0d382e80be7ffdae5 for my
+2021 us-west-1 region.  This will also implicitly select your package
+manager, i.e. yum for RHEL and apt-get for Debian distributions.  In
+this example I used snap to install docker and found `snap wait system
+seed.loaded` necessary to avoid startup race conditions (see
+[EC2_instance.tf](EC2_instance.tf)) Also this choice may affect your
+connection user, i.e. may be 'ubuntu' instead of 'ec2-user' when
+connecting in [EC2_instance.tf](EC2_instance.tf),
+[alpfs_pull.tf](alpfs_pull.tf) or [alpfs_run.tf](alpfs_run.tf).
 
 
 ## variables.tf
@@ -140,6 +141,46 @@ In this case [http://ec2-54-176-39-221.us-west-1.compute.amazonaws.com:8080](htt
 Note: this will change each time it is launched.
 
 
+### curl
+
+For bash or zsh
+
+```
+curl "http://`<publicip.txt`:8080/api/v0/whoami?foo=bar&baz=2.718"
+
+{"args":{"baz":"2.718","foo":"bar"},"host":"13.56.248.56:8080","remote_addr":"73.158.190.51","timestamp":"2021-06-15T17:02:40+0000"}
+
+```
+
+otherwise
+
+```
+curl http://`cat publicip.txt`:8080/api/v0/whoami
+
+{"args":{},"host":"13.56.248.56:8080","remote_addr":"73.158.190.51","timestamp":"2021-06-15T16:41:48+0000"}
+```
+
+### ../client.py
+
+Using the python client above
+
+
+```
+../client.py -p 8080 --host `<publicip.txt` -l debug
+
+
+[2021-06-15 09:53:25,183 DEBUG client.py 57] GET http://ec2-13-56-248-56.us-west-1.compute.amazonaws.com:8080/api/v0/whoami headers: None, params: {'name': 'alpfs', 'e': 2.7182}
+[2021-06-15 09:53:25,193 DEBUG connectionpool.py 227] Starting new HTTP connection (1): ec2-13-56-248-56.us-west-1.compute.amazonaws.com:8080
+[2021-06-15 09:53:25,232 DEBUG connectionpool.py 452] http://ec2-13-56-248-56.us-west-1.compute.amazonaws.com:8080 "GET /api/v0/whoami?name=alpfs&e=2.7182 HTTP/1.1" 200 171
+GET /api/v0/whoami {'args': {'e': '2.7182', 'name': 'alpfs'}, 'host': 'ec2-13-56-248-56.us-west-1.compute.amazonaws.com:8080', 'remote_addr': '73.158.190.51', 'timestamp': '2021-06-15T16:53:25+0000'}
+[2021-06-15 09:53:25,233 DEBUG client.py 76] POST http://ec2-13-56-248-56.us-west-1.compute.amazonaws.com:8080/api/v0/whoareyou headers: None, JSON:{'name': 'lrmcfarland', 'uri': 'starbug.com'},  files:None
+[2021-06-15 09:53:25,234 DEBUG connectionpool.py 227] Starting new HTTP connection (1): ec2-13-56-248-56.us-west-1.compute.amazonaws.com:8080
+[2021-06-15 09:53:25,275 DEBUG connectionpool.py 452] http://ec2-13-56-248-56.us-west-1.compute.amazonaws.com:8080 "POST /api/v0/whoareyou HTTP/1.1" 200 184
+POST /api/v0/whoareyou {'args': {'name': 'lrmcfarland', 'uri': 'starbug.com'}, 'host': 'ec2-13-56-248-56.us-west-1.compute.amazonaws.com:8080', 'remote_addr': '73.158.190.51', 'timestamp': '2021-06-15T16:53:25+0000'}
+
+```
+
+
 ## SSH
 
 These scripts will output two files to the local directory: alpfs_key.pem and publicip.txt.
@@ -198,5 +239,3 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 terraform destroy
 
 ```
-
-
