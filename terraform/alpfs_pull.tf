@@ -6,6 +6,8 @@ depends_on = [
     aws_instance.alpfs
   ]
 
+# TODO depends on mount starbug EBS?
+
 connection {
     type     = "ssh"
     user     = var.ami_user
