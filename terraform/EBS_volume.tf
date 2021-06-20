@@ -1,6 +1,6 @@
 # Create EBS volumes and Attach to EC2 Instance
 
-# warning: /dev/xvdh is created and destoryed each time
+# warning: /dev/xvdh is not designed to persist. best use case: partition for logs
 
 # TODO store already created and has snapshot_id and not destroyed
 # TODO snapshot_id = "snap-073cb7ab26e8050be" pre created

@@ -153,6 +153,91 @@ terraform init
 
 ```
 
+# EBS Volumes
+
+[EBS_volume.tf](EBS_volume.tf) contains an example that creates an EBS volume on /dev/xvdh and mounts it on /mnt/sdh.
+This is created and destroyed with the instance and does not persist.
+
+
+
+## Useful Linux volume Commnads
+
+```
+lsblk
+```
+```
+ubuntu@ip-172-31-26-161:~$ lsblk
+NAME    MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+loop0     7:0    0  33.3M  1 loop /snap/amazon-ssm-agent/3552
+loop1     7:1    0  55.5M  1 loop /snap/core18/1997
+loop2     7:2    0  70.4M  1 loop /snap/lxd/19647
+loop3     7:3    0  32.3M  1 loop /snap/snapd/11588
+loop4     7:4    0 131.6M  1 loop /snap/docker/796
+xvda    202:0    0    16G  0 disk 
+└─xvda1 202:1    0    16G  0 part /
+xvdh    202:112  0     4G  0 disk /mnt/sdh
+
+```
+
+
+```
+fdisk -l
+```
+
+```
+ubuntu@ip-172-31-18-28:~$ sudo fdisk -l
+Disk /dev/loop0: 33.35 MiB, 34959360 bytes, 68280 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop1: 55.46 MiB, 58142720 bytes, 113560 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop2: 70.39 MiB, 73797632 bytes, 144136 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop3: 32.28 MiB, 33841152 bytes, 66096 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop4: 131.61 MiB, 137990144 bytes, 269512 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/xvda: 16 GiB, 17179869184 bytes, 33554432 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x5198cbc0
+
+Device     Boot Start      End  Sectors Size Id Type
+/dev/xvda1 *     2048 33554398 33552351  16G 83 Linux
+
+
+Disk /dev/xvdh: 4 GiB, 4294967296 bytes, 8388608 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+```
+
+
+
+
 
 
 # To apply
