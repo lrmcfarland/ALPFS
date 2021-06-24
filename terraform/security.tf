@@ -31,7 +31,7 @@ resource "null_resource" "savekey"  {
 resource "aws_security_group" "allow_ALPFS_and_SSH" {
   name        = "allow_ALPFS_and_SSH"
   description = "Allow ALPFS and ssh inbound traffic"
-  # allow ingress of port 80
+  # allow ingress of port 8080
   ingress {
     description = "Allow HTTP ALPFS"
     from_port   = 8080
